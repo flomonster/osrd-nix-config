@@ -56,6 +56,7 @@ in unstable.mkShell {
     (unstable.python3.withPackages make_packages)
     # EDITOAST
     unstable.cargo
+    unstable.cargo-watch
     unstable.rustc
     unstable.rustfmt
     unstable.clippy

@@ -68,4 +68,5 @@ in unstable.mkShell {
   ];
 
   RUST_SRC_PATH = "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
+  RUST_TEST_THREADS = "2";
 }

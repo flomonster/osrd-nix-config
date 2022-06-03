@@ -2,27 +2,19 @@ let unstable = import <nixos-unstable> { overlays = [ (import <rust-overlay> ) ]
 
 build_railway_utils = ps: (ps.buildPythonPackage {
   name = "railway_utils";
-  version = "0.0.10";
+  version = "0.0.19";
   src = unstable.fetchzip {
-    url = "https://gitlab.com/api/v4/projects/20981537/packages/pypi/files/752594f23f5fcf4a5b1155f246db0333dc6ce75113c79666ed849d4d10d33a99/osrdata_railway_utils-0.0.10.tar.gz";
-    hash = "sha256:1fpds1yln4rhbdfh2kakdgz1501pwhrvz3nv7i1ap5k981rmjhrs";
+    url = "https://gitlab.com/api/v4/projects/20981537/packages/pypi/files/cd83ffba7c8bbac0df87c1870c9b6c07b7310d29e1eef60403fc272dbc82cba4/railway_utils-0.0.19.tar.gz";
+    hash = "sha256-UVV9w9AVqA94cDsFnvmYLFafDRIMdvRuLYxKjv3FyiA=";
   };
 });
 
 make_packages = ps:
-    let django = (ps.django_3.override { withGdal = true; }).overrideAttrs (
-          oldAttrs: rec {
-            version = "4.0.4";
-            src = ps.fetchPypi {
-              pname = "Django";
-              inherit version;
-              sha256 = "4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5";
-            };
-          }
-        );
-    djangorestframework = (ps.djangorestframework.override { django = django; });
-    djangorestframework-gis = (ps.callPackage (import ./django-rest-framework-gis.nix) { inherit djangorestframework; });
-    geojson-pydantic = (ps.callPackage (import ./geojson-pydantic.nix) { pydantic = ps.pydantic; });
+    let
+       django = ps.django_4.override { withGdal = true; };
+       djangorestframework = (ps.callPackage (import ./django-rest-framework.nix) { django = django; });
+       djangorestframework-gis = (ps.callPackage (import ./django-rest-framework-gis.nix) { djangorestframework = djangorestframework; });
+       geojson-pydantic = (ps.callPackage (import ./geojson-pydantic.nix) { pydantic = ps.pydantic; });
     in [
         django
         ps.black

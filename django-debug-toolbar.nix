@@ -1,11 +1,11 @@
 { lib, buildPythonPackage, fetchPypi, django, sqlparse, setuptools_scm }:
 buildPythonPackage rec {
   pname = "django-debug-toolbar";
-  version = "3.2";
+  version = "3.4.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "1lk134s0gd7ymq2rikkxg3xqw23wnj0g7b52y0fmgg8dj1yn1ql4";
+    sha256 = "ae6bec2c1ce0e6900b0ab0443e1427eb233d8e6f57a84a0b2705eeecb8874e22";
   };
 
   doCheck = false;

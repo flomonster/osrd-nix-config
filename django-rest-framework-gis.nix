@@ -1,11 +1,11 @@
 { lib, buildPythonPackage, fetchPypi, djangorestframework }:
 buildPythonPackage rec {
   pname = "djangorestframework-gis";
-  version = "0.18";
+  version = "1.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "6ddd201a208e68f8f11ac71d2df2c030b1280818a4b54681be00e73057fcafb1";
+    sha256 = "921c5adbc9a7c0502c905957a6695b67f55d7bf6582e1ab837888b55a1fce5a6";
   };
 
   doCheck = false;

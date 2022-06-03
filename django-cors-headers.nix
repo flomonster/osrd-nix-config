@@ -1,11 +1,11 @@
 { lib, buildPythonPackage, fetchPypi, django, sqlparse, setuptools_scm, redis }:
 buildPythonPackage rec {
   pname = "django-cors-headers";
-  version = "3.10.0";
+  version = "3.12.0";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "0y1gcl98brp2lb9107jm8png34f10z4l076w970njr94ymh46vyd";
+    sha256 = "5f07e2ff8a95c887698e748588a4a0b2ad0ad1b5a292e2d33132f1253e2a97cb";
   };
 
   doCheck = false;

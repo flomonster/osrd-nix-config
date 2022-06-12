@@ -49,6 +49,7 @@ in unstable.mkShell {
     # EDITOAST
     unstable.cargo
     unstable.cargo-watch
+    unstable.cargo-tarpaulin
     unstable.rustc
     unstable.rustfmt
     unstable.clippy

@@ -18,7 +18,6 @@ make_packages = ps:
     in [
         django
         ps.black
-        ps.celery
         ps.flake8
         ps.intervaltree
         ps.jsonschema

@@ -22,6 +22,7 @@ make_packages = ps:
         ps.intervaltree
         ps.jsonschema
         ps.numpy
+        ps.mock
         ps.pillow
         ps.progress
         ps.psycopg2

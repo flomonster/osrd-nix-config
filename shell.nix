@@ -1,14 +1,5 @@
 let unstable = import <nixos-unstable> { overlays = [ (import <rust-overlay> ) ]; };
 
-build_railway_utils = ps: (ps.buildPythonPackage {
-  name = "railway_utils";
-  version = "0.0.19";
-  src = unstable.fetchzip {
-    url = "https://gitlab.com/api/v4/projects/20981537/packages/pypi/files/cd83ffba7c8bbac0df87c1870c9b6c07b7310d29e1eef60403fc272dbc82cba4/railway_utils-0.0.19.tar.gz";
-    hash = "sha256-UVV9w9AVqA94cDsFnvmYLFafDRIMdvRuLYxKjv3FyiA=";
-  };
-});
-
 make_packages = ps:
     let
        django = ps.django_4.override { withGdal = true; };
@@ -20,7 +11,6 @@ make_packages = ps:
         ps.black
         ps.flake8
         ps.intervaltree
-        ps.jsonschema
         ps.numpy
         ps.mock
         ps.pillow
@@ -31,7 +21,6 @@ make_packages = ps:
         ps.websockets
         (ps.callPackage (import ./django-debug-toolbar.nix) { django = django; })
         (ps.callPackage (import ./kdtree.nix) {})
-        (build_railway_utils ps)
         djangorestframework
         djangorestframework-gis
         geojson-pydantic
@@ -62,5 +51,6 @@ in unstable.mkShell {
 
   RUST_SRC_PATH = "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
   RUST_TEST_THREADS = "2";
+  ROCKET_ENV = "dev";
   OSRD_DEV = "True";
 }

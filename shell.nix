@@ -53,4 +53,5 @@ in unstable.mkShell {
   RUST_TEST_THREADS = "2";
   ROCKET_ENV = "dev";
   OSRD_DEV = "True";
+  OSRD_BACKEND_URL = "http://localhost:8080";
 }

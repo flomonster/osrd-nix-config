@@ -1,4 +1,4 @@
-let unstable = import <nixos-unstable> { overlays = [ (import <rust-overlay> ) ]; };
+let stable = import <nixos> { overlays = [ (import <rust-overlay> ) ]; };
 
 make_packages = ps:
     let
@@ -27,29 +27,29 @@ make_packages = ps:
         (ps.callPackage (import ./django-cors-headers.nix) { django = django; })
         (ps.callPackage (import ./django-redis.nix) { django = django; redis=ps.redis;})
     ];
-in unstable.mkShell {
+in stable.mkShell {
   nativeBuildInputs = [
-    unstable.rust-bin.nightly.latest.default
+    stable.rust-bin.nightly.latest.default
   ];
 
   buildInputs = [
     # API
-    (unstable.python3.withPackages make_packages)
+    (stable.python3.withPackages make_packages)
     # EDITOAST
-    unstable.cargo
-    unstable.cargo-watch
-    unstable.cargo-tarpaulin
-    unstable.rustc
-    unstable.rustfmt
-    unstable.clippy
-    unstable.rust-analyzer
+    stable.cargo
+    stable.cargo-watch
+    stable.cargo-tarpaulin
+    stable.rustc
+    stable.rustfmt
+    stable.clippy
+    stable.rust-analyzer
 
-    unstable.postgresql
-    unstable.openssl
-    unstable.pkgconfig
+    stable.postgresql
+    stable.openssl
+    stable.pkgconfig
   ];
 
-  RUST_SRC_PATH = "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
+  RUST_SRC_PATH = "${stable.rust.packages.stable.rustPlatform.rustLibSrc}";
   RUST_TEST_THREADS = "2";
   ROCKET_ENV = "dev";
   OSRD_DEV = "True";

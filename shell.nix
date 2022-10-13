@@ -26,6 +26,12 @@ make_packages = ps:
         geojson-pydantic
         (ps.callPackage (import ./django-cors-headers.nix) { django = django; })
         (ps.callPackage (import ./django-redis.nix) { django = django; redis=ps.redis;})
+
+        # Chartos
+        ps.uvicorn
+        ps.fastapi
+        ps.asyncpg
+        ps.aioredis
     ];
 in stable.mkShell {
   nativeBuildInputs = [

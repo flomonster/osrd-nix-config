@@ -57,7 +57,7 @@ in stable.mkShell {
 
   RUST_SRC_PATH = "${stable.rust.packages.stable.rustPlatform.rustLibSrc}";
   RUST_TEST_THREADS = "1";
-  ROCKET_ENV = "dev";
+  ROCKET_PROFILE = "debug";
   OSRD_DEV = "True";
   OSRD_BACKEND_URL = "http://localhost:8080";
 }

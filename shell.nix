@@ -14,7 +14,6 @@ make_packages = ps:
         ps.numpy
         ps.mock
         ps.pillow
-        ps.progress
         ps.psycopg
         ps.psycopg2
         ps.pyyaml
@@ -33,6 +32,17 @@ make_packages = ps:
         ps.fastapi
         ps.asyncpg
         ps.aioredis
+
+	# DATA SCIENCE LOL
+	ps.ipykernel ps.jupyterlab
+	ps.shapely ps.pyproj
+	ps.ipympl ps.matplotlib
+	ps.networkx
+	ps.pyosmium
+
+        ps.progress
+	ps.tqdm
+	ps.ipywidgets
     ];
 in stable.mkShell {
   nativeBuildInputs = [
@@ -41,7 +51,7 @@ in stable.mkShell {
 
   buildInputs = [
     # API
-    (stable.python3.withPackages make_packages)
+    (stable.python310.withPackages make_packages)
     # EDITOAST
     stable.cargo
     stable.cargo-watch
@@ -50,7 +60,7 @@ in stable.mkShell {
     stable.rustfmt
     stable.clippy
     stable.rust-analyzer
-
+    stable.osmium-tool
     stable.postgresql
     stable.openssl
     stable.pkgconfig

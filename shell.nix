@@ -5,6 +5,7 @@ make_packages = ps:
        django = ps.django_4.override { withGdal = true; };
        djangorestframework = (ps.callPackage (import ./django-rest-framework.nix) { django = django; });
        djangorestframework-gis = (ps.callPackage (import ./django-rest-framework-gis.nix) { djangorestframework = djangorestframework; });
+       drf-nested-routers = (ps.callPackage (import ./drf-nested-routers.nix) { djangorestframework = djangorestframework; });
        geojson-pydantic = (ps.callPackage (import ./geojson-pydantic.nix) { pydantic = ps.pydantic; });
     in [
         django
@@ -23,6 +24,7 @@ make_packages = ps:
         (ps.callPackage (import ./kdtree.nix) {})
         djangorestframework
         djangorestframework-gis
+        drf-nested-routers
         geojson-pydantic
         (ps.callPackage (import ./django-cors-headers.nix) { django = django; })
         (ps.callPackage (import ./django-redis.nix) { django = django; redis=ps.redis;})
@@ -33,16 +35,16 @@ make_packages = ps:
         ps.asyncpg
         ps.aioredis
 
-	# DATA SCIENCE LOL
-	ps.ipykernel ps.jupyterlab
-	ps.shapely ps.pyproj
-	ps.ipympl ps.matplotlib
-	ps.networkx
-	ps.pyosmium
+        # DATA SCIENCE LOL
+        ps.ipykernel ps.jupyterlab
+        ps.shapely ps.pyproj
+        ps.ipympl ps.matplotlib
+        ps.networkx
+        ps.pyosmium
 
         ps.progress
-	ps.tqdm
-	ps.ipywidgets
+        ps.tqdm
+        ps.ipywidgets
     ];
 in stable.mkShell {
   nativeBuildInputs = [

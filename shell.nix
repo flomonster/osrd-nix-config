@@ -16,6 +16,7 @@ make_packages = ps:
         ps.pillow
         ps.progress
         ps.psycopg
+        ps.psycopg2
         ps.pyyaml
         ps.requests
         ps.websockets

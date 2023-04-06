@@ -10,6 +10,7 @@ make_packages = ps:
     in [
         django
         ps.black
+        ps.isort
         ps.flake8
         ps.intervaltree
         ps.numpy

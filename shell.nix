@@ -64,9 +64,10 @@ in stable.mkShell {
     stable.clippy
     stable.rust-analyzer
     stable.osmium-tool
-    stable.postgresql
+    stable.rPackages.libgeos
     stable.openssl
     stable.pkgconfig
+    stable.postgresql
   ];
 
   RUST_SRC_PATH = "${stable.rust.packages.stable.rustPlatform.rustLibSrc}";

@@ -30,12 +30,6 @@ make_packages = ps:
         (ps.callPackage (import ./django-cors-headers.nix) { django = django; })
         (ps.callPackage (import ./django-redis.nix) { django = django; redis=ps.redis;})
 
-        # Chartos
-        ps.uvicorn
-        ps.fastapi
-        ps.asyncpg
-        ps.aioredis
-
         # DATA SCIENCE LOL
         ps.ipykernel ps.jupyterlab
         ps.shapely ps.pyproj
@@ -56,6 +50,7 @@ in stable.mkShell {
   buildInputs = [
     # API
     (stable.python310.withPackages make_packages)
+    stable.poetry
     # EDITOAST
     stable.cargo
     stable.cargo-watch
@@ -65,7 +60,7 @@ in stable.mkShell {
     stable.clippy
     stable.rust-analyzer
     stable.osmium-tool
-    stable.rPackages.libgeos
+    stable.geos
     stable.openssl
     stable.pkgconfig
     stable.postgresql

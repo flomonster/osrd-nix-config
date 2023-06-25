@@ -43,8 +43,8 @@ make_packages = ps:
     ];
 in stable.mkShell {
   nativeBuildInputs = [
-     stable.rust-bin.nightly.latest.default
-     # stable.rust-bin.stable.latest.default
+     # stable.rust-bin.nightly.latest.default
+     stable.rust-bin.stable.latest.default
   ];
 
   buildInputs = [

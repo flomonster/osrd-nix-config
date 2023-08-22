@@ -52,6 +52,7 @@ in stable.mkShell {
     (stable.python310.withPackages make_packages)
     stable.poetry
     # EDITOAST
+    stable.mold
     stable.cargo
     stable.cargo-watch
     stable.cargo-tarpaulin
@@ -70,4 +71,5 @@ in stable.mkShell {
   ROCKET_PROFILE = "debug";
   OSRD_DEV = "True";
   OSRD_BACKEND_URL = "http://localhost:8080";
+  RUSTFLAGS = "-C link-arg=-fuse-ld=mold";
 }

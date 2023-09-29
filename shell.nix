@@ -2,13 +2,8 @@ let stable = import <nixos> { overlays = [ (import <rust-overlay> ) ]; };
 
 make_packages = ps:
     let
-       django = ps.django_4.override { withGdal = true; };
-       djangorestframework = (ps.callPackage (import ./django-rest-framework.nix) { django = django; });
-       djangorestframework-gis = (ps.callPackage (import ./django-rest-framework-gis.nix) { djangorestframework = djangorestframework; });
-       drf-nested-routers = (ps.callPackage (import ./drf-nested-routers.nix) { djangorestframework = djangorestframework; });
        geojson-pydantic = (ps.callPackage (import ./geojson-pydantic.nix) { pydantic = ps.pydantic; });
     in [
-        django
         ps.black
         ps.isort
         ps.flake8
@@ -21,14 +16,8 @@ make_packages = ps:
         ps.pyyaml
         ps.requests
         ps.websockets
-        (ps.callPackage (import ./django-debug-toolbar.nix) { django = django; })
         (ps.callPackage (import ./kdtree.nix) {})
-        djangorestframework
-        djangorestframework-gis
-        drf-nested-routers
         geojson-pydantic
-        (ps.callPackage (import ./django-cors-headers.nix) { django = django; })
-        (ps.callPackage (import ./django-redis.nix) { django = django; redis=ps.redis;})
 
         # DATA SCIENCE LOL
         ps.ipykernel ps.jupyterlab
@@ -52,7 +41,6 @@ in stable.mkShell {
     (stable.python310.withPackages make_packages)
     stable.poetry
     # EDITOAST
-    stable.mold
     stable.cargo
     stable.cargo-watch
     stable.cargo-tarpaulin
@@ -71,5 +59,4 @@ in stable.mkShell {
   ROCKET_PROFILE = "debug";
   OSRD_DEV = "True";
   OSRD_BACKEND_URL = "http://localhost:8080";
-  RUSTFLAGS = "-C link-arg=-fuse-ld=mold";
 }

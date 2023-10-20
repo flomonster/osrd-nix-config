@@ -1,3 +1,9 @@
+# Archive
+
+**This configuration is deprecated. Please don't use it!**
+
+OSRD provides and maintains a [flake.nix](https://github.com/osrd-project/osrd/blob/dev/flake.nix) file.
+
 ## Requirements
 
 This shell suppose you have the following nix channels:
